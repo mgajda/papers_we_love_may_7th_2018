@@ -1,132 +1,183 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>reveal.js - Markdown Demo</title>
+    <title>reveal.js - Markdown Demo</title>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.css" integrity="sha256-82G4efqUnm3xpPDdE5JH3ghUZUebk35mZJXrWzPRnPk=" crossorigin="anonymous" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/white.css" integrity="sha256-0oAOUQW+oPe2IBFchtK038JGbLcsrD89j2TX9b2pveI=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.css" integrity="sha256-82G4efqUnm3xpPDdE5JH3ghUZUebk35mZJXrWzPRnPk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/white.css" integrity="sha256-0oAOUQW+oPe2IBFchtK038JGbLcsrD89j2TX9b2pveI=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/css/zenburn.css" integrity="sha256-uhRpp9AZTJyimq9K0zQf/uW/u1g/IvBiDiXpGpqEZDE=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js" integrity="sha256-+09kLhwACKXFPDvqo4xMMvi4+uXFsRZ2uYGbeN1U8sI=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.js" integrity="sha256-ed+I6eG+vozrXbKtA3F8nbodPcClB/wwyDQQ2LIT5Mk=" crossorigin="anonymous"></script>
   </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<div class="slides">
+      <div class="slides">
+        <!-- Slides are separated by three dashes (quick 'n dirty regular expression) -->
+    
+        <section data-markdown data-separator="^---" data-separator-vertical="^===">
+          <script type="text/template">
+## Papers We Love
 
-                <!-- Use external markdown resource, separate slides by three newlines; vertical slides by two newlines -->
-                <section data-markdown="slides.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n"></section>
+["Compile-Time Extensions to Hybrid ODEs"](
+https://arxiv.org/abs/1704.03105)
 
-                <!-- Slides are separated by three dashes (quick 'n dirty regular expression) -->
-                <section data-markdown data-separator="---">
-                    <script type="text/template">
-                        ## Demo 1
-                        Slide 1
-                        ---
-                        ## Demo 1
-                        Slide 2
-                        ---
-                        ## Demo 1
-                        Slide 3
-                    </script>
-                </section>
+Y. Zeng, F Bartha, and W. Taha
 
-                <!-- Slides are separated by newline + three dashes + newline, vertical slides identical but two dashes -->
-                <section data-markdown data-separator="^\n---\n$" data-separator-vertical="^\n--\n$">
-                    <script type="text/template">
-                        ## Demo 2
-                        Slide 1.1
+May 7th, 2018
 
-                        --
+HackerSpace.SG
 
-                        ## Demo 2
-                        Slide 1.2
+Referred by Michał J. Gajda
+          </script>
+        </section>
+        <section>
+          <h3>ODE</h3>
+          <p>Ordinary Differential Equation:</p>
+          <ul>
+            <li>any equation of ordinary derivative</li>
+            <li>way of modeling continuous change</li>
+          </ul>
+          <script type="math/tex; mode=display">
+            \frac{\delta{x}}{\delta{t}} = cos t 
+          </script>
+        </section>
+        <section data-markdown data-separator="^---" data-separator-vertical="^===">
+          <script type="text/template">
+## Automata
 
-                        ---
+Describing systems by finite number of states:
 
-                        ## Demo 2
-                        Slide 2
-                    </script>
-                </section>
+| Object  | Automaton |
+|---------|------------|
+| regular expressions | deterministic finite automata |
+| context-free grammars | pushdown automata |
+| XML schemas   | tree automata |
+| monadic logic | tree automata |
+| hardware circuits | Moore automata |
+| differential dynamic logic | hybrid automata |
+---
+## Modeling languages
 
-                <!-- No "extra" slides, since there are no separators defined (so they'll become horizontal rulers) -->
-                <section data-markdown>
-                    <script type="text/template">
-                        A
+Whenever system reaches the scale, its description:
+* becomes new modeling language,
+* and/or becomes new file format with its own editor,
+  viewer etc.
 
-                        ---
+Examples:
+* Probabilistic languages: [_STAN_]()
+* Neural Network configuration: [TensorFlow](https://www.tensorflow.org/)
+* Computational semantics: [_K framework_](http://kframework.org/)
+* Interactive fiction: [_Inform_](https://en.wikipedia.org/wiki/Inform), [_InkleStudios Ink_](https://www.inklestudios.com/ink/)
+* Router/switch configuration: [_P4_](https://p4.org/)
+* Reachability tools: [_dReach_](https://scungao.github.io/papers/dreach_tool.pdf)
+---
+## Hybrid system use case
+![CoasterX use case](coasterx_example.png)
+![CoasterX model](coasterx_model.png)
 
-                        B
+[_From Bohrer, Luo, Chuang, Platzer 2018_](http://www.cs.cmu.edu/~bbohrer/pub/adhs18.pdf)
+---
+## Hybrid system analysis
+![Reachability counter-example](reachability.png)
+[From Brandl'2011.](https://scungao.github.io/papers/dreach_tool.pdf)
+          </script>
+        </section>
+        <section>
+          <h3>Hybrid programs</h3>
 
-                        ---
+          <p>Syntax:</p>
+          <ul>
+            <li>α,β are programs</li>
+            <li>x:=θ is discrete assignment</li>
+            <li>x′=f(x)&amp;Q − let x′ evolve while Q is true</li>
+            <li>?Q − abort if Q is not true</li>
+            <li>α∪β − nondeterministically run α or β</li>
+            <li>α;β − run β in state resulting from α</li>
+            <li>α<sup>*</sup> - repeat α any nonnegative number of times</li>
+          </ul>
+          <p>
+            <em>See <a href="http://www.cs.cmu.edu/~bbohrer/pub/adhs18.pdf">Bohrer, Luo, Chuang, Platzer 2018 </a></em>
+          </p>
+        </section>
+        <section data-markdown data-separator="^---" data-separator-vertical="^===">
+          <script type="text/template">
+### Hybrid program
 
-                        C
-                    </script>
-                </section>
+![spring model](spring_model.png)
+![spring program](spring_program.png)
+![optimized program](spring_program_optimized.png)
 
-                <!-- Slide attributes -->
-                <section data-markdown>
-                    <script type="text/template">
-                        <!-- .slide: data-background="#000000" -->
-                        ## Slide attributes
-                    </script>
-                </section>
+[_From Zeng, Bartha, Taha 2017_](https://arxiv.org/abs/1704.03105)
+---
+## Acumen-17
 
-                <!-- Element attributes -->
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Element attributes
-                        - Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
-                        - Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
-                    </script>
-                </section>
+* Typed
+* Functions: + - × / ˆ && || > >= == != sin cos
+* Standard expressions and: ∂e1/∂e2
+* Equations, inequalities, and set quantified statements.
+---
+## Acumen-17
 
-                <!-- Code -->
-                <section data-markdown>
-                    <script type="text/template">
-                        ```php
-                        public function foo()
-                        {
-                            $foo = array(
-                                'bar' => 'bar'
-                            )
-                        }
-                        ```
-                    </script>
-                </section>
+![Acumen-17 syntax](acumen.png)
 
-                <!-- Images -->
-                <section data-markdown>
-                    <script type="text/template">
-                        ![Sample image](https://s3.amazonaws.com/static.slid.es/logo/v2/slides-symbol-512x512.png)
-                    </script>
-                </section>
+[_From Zeng, Bartha, Taha 2017_](https://arxiv.org/abs/1704.03105)
+---
+## Binding time analysis
 
-            </div>
-		</div>
+![Binding time analysis](binding_time_analysis.png)
 
-		<script>
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+[_From Zeng, Bartha, Taha 2017_](https://arxiv.org/abs/1704.03105)
+---
+## Paper summary
+
+1. System description by ODE is *a program*
+2. Program should be described in standard language
+3. This language can be compiled to:
+  * improve performance
+  * solve the system
+  * check reachability
+  * warn about errors
+4. Compilation is a standard technique applicable way beyond traditional programming
+---
+## Value to take home
+
+Programming languages take over the world:
+* Understood by both man and machine
+* Amenable to automatic analyses
+* Describing anything more complex than fireplace
+
+With applications far beyond *programming*:
+* roller-coaster simulation
+* network configuration
+* visual design
+        </script>
+      </section>
+      </div>
+    </div>
+
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/notes/notes.js' },
           { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/math/math.js' }
- 				]
-			});
-		</script>
+        ]
+      });
+    </script>
 
-	</body>
+  </body>
 </html>
